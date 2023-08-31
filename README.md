@@ -1,2 +1,2 @@
 ## Practing Programming Languages
-- Basic of Html, Css and JavaScript
+- Basic of Python, Html, Css and JavaScript
