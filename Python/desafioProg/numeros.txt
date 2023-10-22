@@ -1,3 +1,0 @@
-#para alterar o intervalo, altere os valores abaixo:
-15
-26
