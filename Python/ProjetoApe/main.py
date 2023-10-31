@@ -53,13 +53,14 @@ def salvar_batalha(jogador, tabuleiro, acertos):
   batalha = open('batalha.txt','a')
   batalha.write('Jogador: '+ jogador + '\n')
   batalha.write('Acertos: '+ str(acertos) + '\n')
-  batalha.write('     A     B     C     D     E     F     G     H   ')
+  batalha.write('     A     B     C     D     E     F     G     H   \n')
   for i in range(8):
     batalha.write('~' * 51 + '\n')
     batalha.write(alfa[i] + ' |  ')
     for l in tabuleiro[i]:
       batalha.write(l + '  |  ')
     batalha.write('\n')
+  batalha.write('~' * 51 + '\n')
   batalha.write('\n' + '\n')
 
 #Para ler o arquivo
