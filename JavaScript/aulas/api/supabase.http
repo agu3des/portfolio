@@ -1,9 +1,0 @@
-# requisição no terminal
-# curl https://viacep.com.br/ws/58015430/json/
-
-###
-
-@cep=58015430
- 
-GET https://viacep.com.br/ws/{{cep}}/json/
- 
