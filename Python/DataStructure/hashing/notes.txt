@@ -1,0 +1,114 @@
+HASHING
+Mapeamento (chave, valor)
+→ Valor é algo associado a chave
+→ Para retornar um inteiro eu teria que fazer alguma operação que retornasse um número
+→ Tem que gerar um índice dentro da tabela
+→ Quando irá dar colisão:
+→ Quanto mais simples melhor
+h(K) = K % m
+k é a key
+m é o len da tabela
+→esse k tem que chegar inteiro
+→Não tem duplicidade, pois ela automaticamente substitui o valor existente 
+→O array deve ter um tamanho fixo
+→Todos são inicializados com None
+
+
+REHASHING 
+Tô ocupado, vai para o da frente
+→Linear: pulo pequeno
+rh(i) = (i+1) % m
+→Quadrática: pulo grande
+No primeiro o ‘i’ é um número  inteiro que começa em 1, nas seguintes, a cada rehasing ele aumenta exponencialmente
+rh(K) = (h(K) +i²)%m
+→Espalhamento duplo: mesmo que der errado, vai ser diferente por conta da relação k % numPrimo
+h1 = K%m
+h2 = numPrimo - (K%numPrimo) 
+numPrimo < m (nossa escolha)
+rh(K) = (h1(K)+i*h2(K)) %m
+ 
+
+ENDEREÇAMENTO ABERTO
+→ Vantagem:
+A busca é realizada diretamente ao bucket correspondente dentro da própria tabela hash
+Ao invés de acessarmos ponteiros extras, calculamos a sequência de posições a serem percorridas
+Aplicações com restrição de memória podem se beneficiar com esse tipo de implementação
+→ Desvantagem:
+Maior esforço de processamento para cálculo das posições disponíveis em caso de colisão (rehashing)
+Em implementações de tabelas de dispersão de tamanho fixo, podemos lidar com a situação em que a hash table está cheia
+
+ENCADEAMENTO 
+→ Se a posição do hash modular não tiver nenhuma, vai se inserir nela uma estrutura encadeada, que faça sentido, ex: listas
+→ Cada índice do list eu crio outro list dentro dele
+→ Pode-se fazer o instanciamento preguiçoso: eu tô por aqui, mas só vou agir se me chamar
+
+
+AULA EXTRA
+Hashing:
+utilize hash function and bucket array
+for an element (key, e), 
+        key pair
+    h(key)
+h = 
+1º hash code map
+2º key to integer
+3º compresseion map(will turn the thing you put into an integer from 0 to n-1)
+4º store e in A[h(key)]
+
+
+Double Hashing:
+
+hash(k) + j * hash2(k)
+
+hash1(k) = k mod 13
+hash2(k) = 7 - (k mod 7)
+
+k = key
+m = len(array) = 13
+mod = %
+primeNumber = 7
+
+keys(18,41,22,44)
+
+K           hash1           hash2           rhD
+18          5               3               
+41          2               \
+22          9               6
+44          5               5               5+(1*5)=10
+
+Array len(13)
+0   1   2   3   4   5   6   7   8   9   10  11  12
+0   1   41   3   4   18   6   7   8   22   44  11  12
+
+Load Factor
+n entries
+n buckets
+loadFactor = e/b
+loadFactor < 1 so: b > e
+more numbers of buckets than the number of entries
+
+loadFactor > 1:
+incriase the numbers of buckets b' + modify hash fuction = rehashing
+xmodB to xmodeB'
+apply h'(x) = modify has function
+
+b' = closest prime number to 2b = more or less double the size
+h(x) = x mod 3
+keys = (6,7,8)
+0   1   2
+6   7   8
+
+e = 3
+b = 3
+loadFactor = 1
+
+b' = 2*3 
+closests prime numbers: 5 and 7, I  want increase so I take the biggest, so 7
+b' = 7
+h'(x) = x mod 7
+0   1   2   3   4   5   6
+7   8   2   3   4   5   6
+we wnlarger the array
+e = 3
+b = 7
+loadFactor = 3/7 < 1
