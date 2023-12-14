@@ -1,4 +1,5 @@
 from hashTable import *
+from chainingHashTab
 
 ht = HashTable()
 

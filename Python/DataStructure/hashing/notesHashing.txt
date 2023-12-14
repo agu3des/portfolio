@@ -72,30 +72,8 @@ delete (key) {
 }
 coloca uma marca de que está livre
 
-Double Hashing:
 
-hash(k) + j * hash2(k)
-
-hash1(k) = k mod 13
-hash2(k) = 7 - (k mod 7)
-
-k = key
-m = len(array) = 13
-mod = %
-primeNumber = 7
-
-keys(18,41,22,44)
-
-K           hash1           hash2           rhD
-18          5               3               
-41          2               \
-22          9               6
-44          5               5               5+(1*5)=10
-
-Array len(13)
-0   1   2   3   4   5   6   7   8   9   10  11  12
-0   1   41   3   4   18   6   7   8   22   44  11  12
-
+REHASHING:
 Load Factor
 n entries
 n buckets
@@ -124,13 +102,38 @@ b' = 7
 h'(x) = x mod 7
 0   1   2   3   4   5   6
 7   8   2   3   4   5   6
-we wnlarger the array
+we enlarger the array
 e = 3
 b = 7
 loadFactor = 3/7 < 1
 
 
-Separate Chainig:
+DOUBLE HASHING:
+hash(k) + j * hash2(k)
+
+hash1(k) = k mod 13
+hash2(k) = 7 - (k mod 7)
+
+k = key
+m = len(array) = 13
+mod = %
+primeNumber = 7
+j = increasing number, starts on 0 and after a collision you add 1 and redo the hash
+
+keys(18,41,22,44)
+
+K           hash1           hash2           rhD
+18          5               3               
+41          2               \
+22          9               6
+44          5               5               5+(1*5)=10
+
+Array len(13)
+0   1   2   3   4   5   6   7   8   9   10  11  12
+0   1  41   3   4  18   6   7   8  22   44  11  12
+
+
+SEPARETE CHAINIG:
 keys(100,105,200,205)
 h(r) = r mod 10
 
@@ -153,35 +156,35 @@ Array of linked list
 
 HASHING
 Mapeamento (chave, valor)
+→ Otimiza a busca
+→ Hash = espalhamento
+→ Tabela de dispersão
 → Valor é algo associado a chave
 → Para retornar um inteiro eu teria que fazer alguma operação que retornasse um número
 → Tem que gerar um índice dentro da tabela
 → Quando irá dar colisão:
-→ Quanto mais simples melhor
+→ Quanto mais simples melhor para não adetar  estrutura de dados como um todo
+→ Os índices devem ser espalhados
 h(K) = K % m
-k é a key
-m é o len da tabela
-→esse k tem que chegar inteiro
-→Não tem duplicidade, pois ela automaticamente substitui o valor existente 
-→O array deve ter um tamanho fixo
-→Todos são inicializados com None
+k = key
+m = len da tabela
+% = resto da divisão
+→ esse k tem que chegar inteiro
+→ Não tem duplicidade, pois ela automaticamente substitui o valor existente 
+→ O array deve ter um tamanho fixo
+→ Todos são inicializados com None
 
+m = 10
+keys = 100, 402, 153, 304, 345, 248
+h(k) = 0, 2, 3, 4, 5, 8
 
-REHASHING 
-Tô ocupado, vai para o da frente
-→Linear: pulo pequeno
-rh(i) = (i+1) % m
-→Quadrática: pulo grande
-No primeiro o ‘i’ é um número  inteiro que começa em 1, nas seguintes, a cada rehasing ele aumenta exponencialmente
-rh(K) = (h(K) +i²)%m
-→Espalhamento duplo: mesmo que der errado, vai ser diferente por conta da relação k % numPrimo
-h1 = K%m
-h2 = numPrimo - (K%numPrimo) 
-numPrimo < m (nossa escolha)
-rh(K) = (h1(K)+i*h2(K)) %m
+0       1       2       3       4       5       6       7       8       9 
+100            402     153     304     345                     248
+
  
 
 ENDEREÇAMENTO ABERTO
+→ Linear Probing, Quadratic Probing e Double Hashing
 → Vantagem:
 A busca é realizada diretamente ao bucket correspondente dentro da própria tabela hash
 Ao invés de acessarmos ponteiros extras, calculamos a sequência de posições a serem percorridas
@@ -190,7 +193,54 @@ Aplicações com restrição de memória podem se beneficiar com esse tipo de im
 Maior esforço de processamento para cálculo das posições disponíveis em caso de colisão (rehashing)
 Em implementações de tabelas de dispersão de tamanho fixo, podemos lidar com a situação em que a hash table está cheia
 
+REHASHING 
+Tô ocupado, vai para o da frente
+→ Linear: pulo pequeno
+h(k) -> rh(h(k))
+rh(i) = (i+1) % m
+i = index
+
+keys = 80, 121, 84, 72, 79, 78
+0   1   2   3   4   5   6
+84      121 80
+        72rh
+            72rh
+                72
+        79rh  
+            79rh
+                79rh
+                  79rh
+    78
+84  78  121 80  72  79   
+
+→ Quadrática: pulo grande
+No primeiro o ‘i’ é um número  inteiro que começa em 1, nas seguintes, a cada rehasing ele aumenta exponencialmente
+rh(K) = (h(K) +i²)%m
+→ Espalhamento duplo: mesmo que der errado, vai ser diferente por conta da relação k % numPrimo
+h1 = K%m
+h2 = numPrimo - (K%numPrimo) 
+numPrimo < m (nossa escolha)
+rh(K) = (h1(K)+i*h2(K)) %m
+ 
+
 ENCADEAMENTO 
+→ Cada chave aponta para uma estrutura encadeada
 → Se a posição do hash modular não tiver nenhuma, vai se inserir nela uma estrutura encadeada, que faça sentido, ex: listas
 → Cada índice do list eu crio outro list dentro dele
 → Pode-se fazer o instanciamento preguiçoso: eu tô por aqui, mas só vou agir se me chamar
+
+Ao invés de ter um índice, eu vou ter uma lista
+m = 5
+keys = 12, 31, 90, 40, 77, 26, 17
+0           1           2           3           4
+[90,40]  [31,26]     [12,17]       []          []    
+
+Vantagem:
+→ Fácil de implementar
+→ A hash nunca fica cheia
+→ Não se sabe quantas vezes ou com que frequência as chaves podem ser inseridas ou excluídas
+Desvantagem:
+→ Desempenho para se achar uma chave por pesquisa é ruim, pior caso é quando tem que varrer tudo 
+→ Perde espaço
+→ Uso de espaço extra
+→ Busca sequencial para se proceder a busca
