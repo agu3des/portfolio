@@ -1,50 +1,19 @@
-HASHING
-Mapeamento (chave, valor)
-→ Valor é algo associado a chave
-→ Para retornar um inteiro eu teria que fazer alguma operação que retornasse um número
-→ Tem que gerar um índice dentro da tabela
-→ Quando irá dar colisão:
-→ Quanto mais simples melhor
-h(K) = K % m
-k é a key
-m é o len da tabela
-→esse k tem que chegar inteiro
-→Não tem duplicidade, pois ela automaticamente substitui o valor existente 
-→O array deve ter um tamanho fixo
-→Todos são inicializados com None
+DICTIONARY --> it's a collection of (key, element) pars
+1. Log File - implementation of dictionary, it's an unordered list
+add an element you put in the end, so O(1)
+Delete search and delete o(n)
+2. Bucket Array --> array of N elements in our range(0, n-1)
+An element with key = k will be stored in A[1]
+ex: (1,c)
+add - o(1) x delete - o(1)
+Disdvantages: keys have to be integers, you need to know the range of the keys before 
+3. Has Function --> hash function, bucket arrayfor an element (key, e), key pair -> h(key)
+hash code maps a key to an integer 
+compression map after finding the integer
+the comprrassion maps hash the integer into an intiger to 0 to n-1 (in the range)
+It's stored the e in A[h(key)] --> you put the element into an array witch maps the hash function using a key
 
-
-REHASHING 
-Tô ocupado, vai para o da frente
-→Linear: pulo pequeno
-rh(i) = (i+1) % m
-→Quadrática: pulo grande
-No primeiro o ‘i’ é um número  inteiro que começa em 1, nas seguintes, a cada rehasing ele aumenta exponencialmente
-rh(K) = (h(K) +i²)%m
-→Espalhamento duplo: mesmo que der errado, vai ser diferente por conta da relação k % numPrimo
-h1 = K%m
-h2 = numPrimo - (K%numPrimo) 
-numPrimo < m (nossa escolha)
-rh(K) = (h1(K)+i*h2(K)) %m
- 
-
-ENDEREÇAMENTO ABERTO
-→ Vantagem:
-A busca é realizada diretamente ao bucket correspondente dentro da própria tabela hash
-Ao invés de acessarmos ponteiros extras, calculamos a sequência de posições a serem percorridas
-Aplicações com restrição de memória podem se beneficiar com esse tipo de implementação
-→ Desvantagem:
-Maior esforço de processamento para cálculo das posições disponíveis em caso de colisão (rehashing)
-Em implementações de tabelas de dispersão de tamanho fixo, podemos lidar com a situação em que a hash table está cheia
-
-ENCADEAMENTO 
-→ Se a posição do hash modular não tiver nenhuma, vai se inserir nela uma estrutura encadeada, que faça sentido, ex: listas
-→ Cada índice do list eu crio outro list dentro dele
-→ Pode-se fazer o instanciamento preguiçoso: eu tô por aqui, mas só vou agir se me chamar
-
-
-AULA EXTRA
-Hashing:
+HASHING:
 utilize hash function and bucket array
 for an element (key, e), 
         key pair
@@ -55,6 +24,53 @@ h =
 3º compresseion map(will turn the thing you put into an integer from 0 to n-1)
 4º store e in A[h(key)]
 
+
+Linear Probing:
+you put in the next space
+h(x) = x mod 10
+keys(18,41,22,32,44,59,79)
+hash(8,1,2,2,4,9,9)
+0   1   2   3   4   5   6   7   8   9  
+    41  22                      18        
+        32
+            32  44                  59
+                                    79
+79
+79  41  22  32  44              18  59
+
+insert(key) 
+{
+    h = hash(key);
+    int i = 0;
+    while(h + i mod N) not empty and i<n {
+        #index
+        i++;
+    }
+}
+if (full) { return;}
+else{
+    add key to a[(h+i)mod n];
+}
+If it's full, we say that's complete, and put a rule that i must be < N
+
+search (key) {
+    h = hash(key);
+    i = 0;
+    while ((h+i)mod N not empty and i < N)
+    {
+        if (A[(h+i)mod N] == key )
+        {
+            return true; #found
+        }
+        i++; #not found
+    }
+    return false
+}
+
+delete (key) {
+
+}
+coloca uma marca de que está livre
 
 Double Hashing:
 
@@ -112,3 +128,69 @@ we wnlarger the array
 e = 3
 b = 7
 loadFactor = 3/7 < 1
+
+
+Separate Chainig:
+keys(100,105,200,205)
+h(r) = r mod 10
+
+    0   1   2   3   4   5   6   7   8   9   10
+   100                105
+   200                205
+
+Insert
+insertion(key, element) {
+    A[key].insertEnd(key, element)
+}
+Search
+search(key, element) {
+    B <- A[key] #B is LL
+    B.serarch(key, element)
+}
+Array of linked list
+
+
+
+HASHING
+Mapeamento (chave, valor)
+→ Valor é algo associado a chave
+→ Para retornar um inteiro eu teria que fazer alguma operação que retornasse um número
+→ Tem que gerar um índice dentro da tabela
+→ Quando irá dar colisão:
+→ Quanto mais simples melhor
+h(K) = K % m
+k é a key
+m é o len da tabela
+→esse k tem que chegar inteiro
+→Não tem duplicidade, pois ela automaticamente substitui o valor existente 
+→O array deve ter um tamanho fixo
+→Todos são inicializados com None
+
+
+REHASHING 
+Tô ocupado, vai para o da frente
+→Linear: pulo pequeno
+rh(i) = (i+1) % m
+→Quadrática: pulo grande
+No primeiro o ‘i’ é um número  inteiro que começa em 1, nas seguintes, a cada rehasing ele aumenta exponencialmente
+rh(K) = (h(K) +i²)%m
+→Espalhamento duplo: mesmo que der errado, vai ser diferente por conta da relação k % numPrimo
+h1 = K%m
+h2 = numPrimo - (K%numPrimo) 
+numPrimo < m (nossa escolha)
+rh(K) = (h1(K)+i*h2(K)) %m
+ 
+
+ENDEREÇAMENTO ABERTO
+→ Vantagem:
+A busca é realizada diretamente ao bucket correspondente dentro da própria tabela hash
+Ao invés de acessarmos ponteiros extras, calculamos a sequência de posições a serem percorridas
+Aplicações com restrição de memória podem se beneficiar com esse tipo de implementação
+→ Desvantagem:
+Maior esforço de processamento para cálculo das posições disponíveis em caso de colisão (rehashing)
+Em implementações de tabelas de dispersão de tamanho fixo, podemos lidar com a situação em que a hash table está cheia
+
+ENCADEAMENTO 
+→ Se a posição do hash modular não tiver nenhuma, vai se inserir nela uma estrutura encadeada, que faça sentido, ex: listas
+→ Cada índice do list eu crio outro list dentro dele
+→ Pode-se fazer o instanciamento preguiçoso: eu tô por aqui, mas só vou agir se me chamar
