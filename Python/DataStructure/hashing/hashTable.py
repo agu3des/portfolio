@@ -52,6 +52,9 @@ class HashTable:
         return hash(key) % len(self.__table)#hash é de python/faz só por isso só tem a chave
                             #é o nosso m
     
+    def __rh(self,index:int):
+        return (index+1) % len(self.__table)
+    
     def put(self, key:any, data:any)->int:
         ''' 
             Método que insere um novo elemento na tabela de dispersão.
