@@ -9,8 +9,8 @@ ht.put(3,22) #utilizando o método, passando key e value
 ht.put(14,33)
 ht.put(32,111)
 # print(ht.__dict__)
+print(f'Tabela antes de elementos com rehash: {ht}')
 ht[2] = 99 #adiconar um valor a chave
-print(ht)
 ht.put(3,0) 
 print(f'Hash após a insersão de elementos: {ht}\n')
 print(f'Diga o valor contido na chave (2): {ht.get(3)}\n')#pegue essa chave e me devolva seu valor

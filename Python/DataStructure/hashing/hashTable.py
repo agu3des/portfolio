@@ -27,11 +27,11 @@ class HashTable:
         if self.isFull():
             return False
         hashData = self.__hash(key)
-        print(hashData)
+        print(f'Valor de hash {hashData} para o par ({key}, {data}).')
 
         while self.__table[hashData] != None:
             hashData = self.__rh(hashData)
-            print(hashData)
+            print(f'Valor de rehash {hashData} para o par ({key}, {data}).')
         self.__table[hashData] = data
         self.__ocupados += 1
 
@@ -55,7 +55,7 @@ class HashTable:
         return None
 
     def remove(self, key):
-        index = self.search(key)
+        index = self.search(self.__hash(key))
         if index is not None:
             self.__table[index] = None
             print(f"Chave {key} removida da tabela hash.")
