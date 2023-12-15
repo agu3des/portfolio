@@ -53,6 +53,7 @@ Ele vai diminuindo o array (retirando os últimos já ordenados)
 p    a                          b
 
 
+
 Merge Sort:
 Recursivo
 Dividindo ao meio, meio até o fim, por recursividade, depois ele devolve pelo mesmo método
@@ -65,7 +66,7 @@ Pega o indice maior menos o menor e divide por dois, se não tem meio certo, ent
 essa primeira parte é o split
 ------------------------------------------------------------
 37 83   78 97      14 59    25  72 (juntou os pares)
-(comparou 0 78 e o 97, então ele copia o menor pra primeira posição e joga o 97 para outra)  
+(comparou o 78 e o 97, então ele copia o menor pra primeira posição e joga o 97 para outra)  
 olha o primeiro 37, ele já sabe que tá ordenado com o 83 então compara com o proximo 78, se ele já é menor ent ele nem olha 97, pq se foi menor que o primeiro e o resto tá ordenado então ele já tá ok
 agora ele compara o 83 com o 78 e troca eles dois
 37 78 83 97

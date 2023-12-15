@@ -68,8 +68,3 @@
 # if __name__ == "__main__":    
 #     array = [65,28,17,34,55,72,88,10,92,20]
 #     quickSort(array)
-
-# Main program to test insertion sort
-if __name__ == "__main__":    
-    array = [65,28,17,34,55,72,88,10,92,20]
-    quickSort(array)

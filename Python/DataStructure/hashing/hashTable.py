@@ -55,7 +55,7 @@ class HashTable:
         return None
 
     def remove(self, key):
-        index = self.search(self.__hash(key))
+        index = self.search(self.__hash)
         if index is not None:
             self.__table[index] = None
             print(f"Chave {key} removida da tabela hash.")
