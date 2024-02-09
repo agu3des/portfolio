@@ -31,11 +31,6 @@ console.log(saida)
 
 
 
-
-
-
-
-
 let sequence = '';
 
 for (let flag = 0; flag <= 99; flag += 1) { ///define a repetição
