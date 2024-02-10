@@ -37,11 +37,17 @@
                     </div>
                 </article>
             </div>
-        <script>window.alert('Minha primeira mensagem!')</script>
-        <!-- ok -->
-        <script>window.confirm('Tá gostando de JS?')</script> 
-        <!-- ok ou cancela -->
-        <script>window.prompt('Qual o seu nome?')</script>
-        <!-- digitar -->
+
+            <!-- <script>window.confirm('Tá gostando de JS?')</script>  -->
+            <!-- ok ou cancela -->
+        <script>
+            var nome = window.prompt('Qual o seu nome?')
+            window.alert('É um grande prazer te conhecer, '+nome)
+            var n1 = Number(window.prompt('Digite um número:'))
+            var n2 = Number(window.prompt('Digite um número:'))
+            var soma = n1 + n2
+            window.alert('A soma dos valores é '+ soma) // desse modo ele vai concatenar 
+
+        </script>
     </body>
 </html>
