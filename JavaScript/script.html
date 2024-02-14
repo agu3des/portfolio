@@ -41,12 +41,15 @@
             <!-- <script>window.confirm('Tá gostando de JS?')</script>  -->
             <!-- ok ou cancela -->
         <script>
-            var nome = window.prompt('Qual o seu nome?')
+            let nome = window.prompt('Qual o seu nome?')
+            document.write(`Olá, <strong>${nome}<strong>! Seu nome tem ${nome.length} letras.`)
+            document.write(`Seu nome em maiúculas ${nome.toUpperCase()}, seu nome em minúsculas ${nome.toLocaleLowerCase()}`)
             window.alert('É um grande prazer te conhecer, '+nome)
-            var n1 = Number(window.prompt('Digite um número:'))
-            var n2 = Number(window.prompt('Digite um número:'))
-            var soma = n1 + n2
+            let n1 = Number(window.prompt('Digite um número:'))
+            let n2 = Number(window.prompt('Digite um número:'))
+            let soma = n1 + n2
             window.alert('A soma dos valores é '+ soma) // desse modo ele vai concatenar 
+            
 
         </script>
     </body>
