@@ -7,11 +7,11 @@
 // }
 
 import java.io.IOException;
-public class Main {
+public class BeeCrowd {
  
     public static void main(String[] args) throws IOException {
-        int A;
-        int B;
+        int A = 7;
+        int B = 12;
         System.out.println(A + B);
     }
 }
