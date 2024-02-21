@@ -1,4 +1,4 @@
-package Aulas;
+package Curso;
 public class Variaveis{
     public static void main(String[] args) {
         //convenção java
@@ -18,7 +18,6 @@ public class Variaveis{
         System.out.println("Nome = "+nome);
         System.out.println("Nome da gata = "+nomeDaGata);
         System.out.println("Ano = "+ano2024);
-
 
         System.out.println("Inteiros");
         byte idade1 = 20;
