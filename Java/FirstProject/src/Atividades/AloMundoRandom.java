@@ -1,4 +1,4 @@
-package Aulas;
+package Atividades;
 
 import java.util.Random;
 

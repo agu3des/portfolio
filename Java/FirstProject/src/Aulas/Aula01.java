@@ -1,9 +1,9 @@
-package Aulas;
-
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import java.util.Random;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Aula01 {
 	public static void main(String[] args) {
@@ -33,32 +33,13 @@ public class Aula01 {
         lista.clear(); //método do tipo void
 
         //ClasseUtilitaria.método(...)
-        double x = Math.sqrt(16); //método do tipo double
+        double l = Math.sqrt(16); //método do tipo double
         Collections.sort(lista); //método do tipo void
 
         String s;
         s = ""; //um objeto com 0 caractere
         s = "a"; //um objeto com 1 caractere
         s = "sala" + "1002"; //concatenação
-
-        String n = "ana";
-        String d = "ANA";
-        if (n.equals(d))
-
-        System.out.println("igual");
-
-        else
-
-        System.out.println("diferente"); //ok
-
-        if (n.equalsIgnoreCase(d))
-
-        System.out.println("igual"); //ok
-
-        else
-
-        System.out.println("diferente");
-
 
 	}
 }
@@ -67,7 +48,6 @@ public class Aula01 {
 /*import java.util.Scanner;
 
 public class Amigo {
-
 	public static void main(String[] args) {
 
 		Scanner teclado = new Scanner(System.in);
@@ -92,4 +72,15 @@ public class Amigo2 {
 		JOptionPane.showMessageDialog(null,
 		nome1 +" é amigo de "+ nome2);
 	}
+}*/
+
+/*public static void main(...) {
+	int a=2; //a é global
+	if (a > 0) {
+		int b=3; //b é local
+		a=4;
+		System.out.println(a+b); //7
+	}
+	System.out.println(a); //4
+	System.out.println(b); //inacessível
 }*/

@@ -1,8 +1,10 @@
-package Aulas;
+package Atividades;
 
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URL;
+
+import String;
 
 public class Browser {
 	public static void main(String[] args) {
