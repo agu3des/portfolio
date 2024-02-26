@@ -1,51 +1,24 @@
-import java.util.Scanner;
-import javax.swing.JOptionPane;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+/*
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URL;
 
-public class Aula01 {
+
+public class Browser {
 	public static void main(String[] args) {
-		int a = 0; //valor
-		Integer b = 4; //objeto
-		a = b + 1; //5
-		b = a + 2; //7
-		
-		double x;
-		long lo; //inteiro longo
-		x = Math.abs(-3); // 3 (modulo)
-		x = Math.pow(2,3); // 8 (potencia)
-		x = Math.sqrt(16); // 4 (raiz)
-		lo= Math.round(2.75); // 3 (arredonda)
-		x = Math.floor(2.4); // 2.0 (piso)
-		x = Math.ceil(2.4); // 3.0 (teto)
-		x = Math.sin(3.1415); // 0
-		x = Math.PI; // valor de pi
-		
-        //classe | variável | criação objeto | método construtor pa inicializar do objeto  
-		String nome = new String("joao da silva"); //novo objeto
-		Random sorteio = new Random();
-		Scanner teclado = new Scanner(System.in); //variável dentro da classe system
+		try {
+	           URI uri = new URL("https://www.ifpb.edu.br/joaopessoa").toURI();
 
-        //variaveldereferencia.método(...)
-        int i = nome.length(); //método do tipo int
-        lista.clear(); //método do tipo void
-
-        //ClasseUtilitaria.método(...)
-        double l = Math.sqrt(16); //método do tipo double
-        Collections.sort(lista); //método do tipo void
-
-        String s;
-        s = ""; //um objeto com 0 caractere
-        s = "a"; //um objeto com 1 caractere
-        s = "sala" + "1002"; //concatenação
-
+	           Desktop.getDesktop().browse(uri);
+	       }
+	       catch (Exception e) {
+	           System.out.println("problema na url");
+	       }
 	}
 }
 
 
-/*import java.util.Scanner;
+import java.util.Scanner;
 
 public class Amigo {
 	public static void main(String[] args) {

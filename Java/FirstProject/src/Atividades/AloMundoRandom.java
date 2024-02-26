@@ -1,5 +1,3 @@
-package Atividades;
-
 import java.util.Random;
 
 public class AloMundoRandom {
