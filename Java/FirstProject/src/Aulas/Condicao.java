@@ -24,16 +24,20 @@ class IMC {
         double imc = peso / Math.pow(altura, 2);
         if (imc < 18.5)
             System.out.println("abaixo do normal");
-        else if (imc < 25)
-            System.out.println("normal");
-        else if (imc < 30)
-            System.out.println("acima do normal");
-        else if (imc < 35)
-            System.out.println("obesidade 1");
-        else if (imc < 40)
-            System.out.println("obesidade 2");
-        else
-            System.out.println("morbidade");
+        else 
+            if (imc < 25)
+                System.out.println("normal");
+            else 
+                if (imc < 30)
+                    System.out.println("acima do normal");
+                else 
+                    if (imc < 35)
+                        System.out.println("obesidade 1");
+                    else 
+                        if (imc < 40)
+                            System.out.println("obesidade 2");
+                        else
+                            System.out.println("morbidade");
     }
 }
 

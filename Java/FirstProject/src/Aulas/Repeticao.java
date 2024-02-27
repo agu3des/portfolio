@@ -6,7 +6,7 @@ class Aleatório {
 		Random sorteio = new Random();
         int numero;
         for(int i=1; i<=6; i++) {
-            numero = sorteio.nextInt(60) +1; //de um a 60
+            numero = sorteio.nextInt(60) +1; //de 1 a 60
             System.out.println(numero);
         }
     }
@@ -39,18 +39,3 @@ class Sorteio {
         }
 }
 
-
-class Array{
-	public static void main(String args[]){
-		int[] numeros = new int[4] ;
-		numeros[0] = 8;
-		numeros[1] = 2;
-		numeros[2] = 9;
-		numeros[3] = 2;
-		//int[] numeros = {8,2,9,2};
-		System.out.println(numeros.length);
-		System.out.println(numeros[0]);
-		System.out.println(numeros[3]);
-		System.out.println(numeros[2]);
-	}
-}
