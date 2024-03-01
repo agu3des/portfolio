@@ -6,5 +6,7 @@ public class Janela {
         janela.setSize(500,300);
         janela.setResizable(false); //redimensionar 
         janela.setVisible(true);
+        int x = janela.getX();
+        int y = janela.getY();
     }
 }
