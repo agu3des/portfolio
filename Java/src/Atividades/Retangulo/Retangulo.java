@@ -1,3 +1,6 @@
+import String;
+
+package Retangulo;
 public class Retangulo {
 	public int id; // identificar qual o objeto
 	public double largura; // atributo

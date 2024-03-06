@@ -1,3 +1,4 @@
+package Unique;
 /*Exercício de String
 Uma prova objetiva tem 10 questões cujas respostas podem ser “a”, “b”, “c”, “d” ou “e”. Faça um programa para ler as respostas do
 gabarito e as respostas da prova e calcular o número de acertos
@@ -11,6 +12,7 @@ Número de acertos: 6*/
 
 
 import java.util.Scanner;
+
 
 public class Exerc01 {
     public static void main(String[] args) {

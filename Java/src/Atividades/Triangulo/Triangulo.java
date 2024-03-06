@@ -1,4 +1,6 @@
+package Triangulo;
 //Exerc02
+
 public class Triangulo {
 	public int id;
 	public double altura;

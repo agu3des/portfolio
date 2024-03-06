@@ -1,4 +1,6 @@
+package Unique;
 import javax.swing.JFrame;
+
 public class Janela {
     public static void main(String[] agrs) {
         JFrame janela = new JFrame();

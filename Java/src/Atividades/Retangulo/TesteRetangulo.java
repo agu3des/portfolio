@@ -1,3 +1,4 @@
+package Retangulo;
 public class TesteRetangulo {
 	public static void main(String[] args) {
         Retangulo r = new Retangulo();

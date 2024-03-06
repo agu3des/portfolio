@@ -1,4 +1,6 @@
-public class Exerc02 {
+
+package Triangulo;
+public class TesteTriangulo {
     public static void main (String[] args){
         Triangulo t1 = new Triangulo(1, 3, 4, 4, 5);
         System.out.println("Area 1 = "+t1.calcularArea()); //12.0
