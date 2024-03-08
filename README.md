@@ -26,6 +26,7 @@ https://ananda-guedes.notion.site/Codes-9c1e863185a14107a82ac5ba5fe27912?pvs=4
 | JavaScript | There are javascript practices, ex: array, functions.|
 | Python | There are python practices, ex: decision, repetition, function.|
 | Sql | There are sql practices, ex: create, insert, use.|
+| R | There are r practices, ex: mean, log.|
 | OperationalSystem | There are os practices, ex: thread, sockets, semaphore.|
 
 
