@@ -174,3 +174,45 @@ select codart
 Select f.titulo as Filme
 	From filme f left join categoria c on f.categcod = c.codcat
 	Where f.categcod is null; 
+
+
+
+--1. Explique: o que a seguinte consulta faz e apresenta?
+select f.titulo
+from filme f
+where f.estudcod in (select e.codest
+from estudio e
+where e.nomeest like 'P%');
+--A consulta retorna o título do filme, esse que pertence a um estúdio cuja inicial do nome é P.
+
+--2. Observe agora a seguinte consulta. O que ela faz? Em que ela difere da anterior?
+select f.titulo
+from filme f
+where exists
+(select e.codest
+from estudio e
+where f.estudcod = e.codest and nomeest like 'P%');
+--A consulta retorna o mesmo da anterior, no entanto é utilizado a condição ‘exists’, que obriga a existência do fator, além de que existe uma comparação entre as chaves.
+
+-- Use subqueries (subconsultas) para formular as consultas pedidas.
+--3. Crie uma consulta que mostre as descrições de categorias que estão na tabela Filme (associadas a filmes).
+select c.desccat
+from categoria c
+where c.codcat in(select f.categcod
+				 from filme f)
+
+--4. Qual o nome do artista cujo nome de personagem é ‘Natalie’?
+
+--5. Existe algum artista cadastrado que não esteja na tabela Personagem?
+
+--6. Crie uma consulta que apresente os nomes dos artistas que possuem cachê acima da média. Nesta, além de usar subconsulta, use JOIN entre artista e personagem.
+
+--7. Para a tabela artista, crie uma view artistaV com os seguintes campos: codart, nomeart, datanasc. Renomeie “codart” para “código do artista” e “nomeart” para “nome” na view. Liste o conteúdo da view criada.
+
+--8. Crie uma view filmeV com os seguintes campos: titulo,duração, ano, estúdio (nome do estúdio). Liste, em seguida, seu conteúdo .
+
+--9. Faça a inserção da artista “Mariana Ximenes” com a data de nascimento ‘27/11/78’ através da view artistaV. Como foi possível inserir por meio da view? Explique.
+
+--10. Tente inserir um filme através da view filmeV. O que aconteceu? Explique.
+
+--11. Faça a inserção através da tabela base filme. Depois consulte a view. O filme foi inserido? Consulte também a tabela base e explique.

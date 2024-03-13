@@ -8,7 +8,11 @@ public class TestePilha {
 
         System.out.println(p1.topo());
         System.out.println(p1.estaVazia());
-        p1.desempilhar();
+        try {
+            p1.desempilhar();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(p1.topo());
         p1.esvaziar();
         System.out.println(p1.estaVazia());
@@ -17,12 +21,12 @@ public class TestePilha {
         p1.empilhar("Maria");
         p1.empilhar("Pedro");
         p1.empilhar("Ana");
-        p1.tamanho()
-        System.out.println(p1)
+        p1.tamanho();
+        System.out.println(p1);
 
-        Pilha <Integer> p2 = new Pilha();
-        p2.empilhar(1);
-        p2.empilhar(6);
-        p2.tamanho();//demostrar que não funciona para números
+        // Pilha <Integer> p2 = new Pilha();
+        // p2.empilhar(1);
+        // p2.empilhar(6);
+        // p2.tamanho();//demostrar que não funciona para números
     }
 }
