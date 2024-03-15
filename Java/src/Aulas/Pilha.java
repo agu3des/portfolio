@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 //classe genérica, vira uma lista de qualquer coisa
 
-public class Pilha {
-    private ArrayList<String> dados = new ArrayList<>(); 
+public class Pilha<T> {
+    private ArrayList<T> dados = new ArrayList<>(); 
                     //<T> o usuário que irá dizer o que quer
-    public void empilhar(String s) {
+    public void empilhar(T s) {
         dados.add(s); //adicionar um elemento na lista
     }
 
@@ -16,11 +16,15 @@ public class Pilha {
     }
 
     public boolean estaVazia() {
-        return dados.isempity();
+        return dados.isEmpty();
     }
-
-    public String topo() {
-        return dados.get(dados.size()-1);//pega o ultimo do array
+    
+    public T topo() {
+        if (!estaVazia()) {
+            return dados.get(dados.size() - 1);
+        } else {
+            return null;
+        }
     }
     
     public void esvaziar() {
