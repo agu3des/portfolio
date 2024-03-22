@@ -198,21 +198,53 @@ where f.estudcod = e.codest and nomeest like 'P%');
 --3. Crie uma consulta que mostre as descrições de categorias que estão na tabela Filme (associadas a filmes).
 select c.desccat
 from categoria c
-where c.codcat in(select f.categcod
-				 from filme f)
+where c.codcat in(select f.categcod from filme f)
 
 --4. Qual o nome do artista cujo nome de personagem é ‘Natalie’?
+select a.nomeart
+from artista a
+where a.codart in (select p.artcod
+from personagem p
+where p.nomeper like 'Natalie');
 
 --5. Existe algum artista cadastrado que não esteja na tabela Personagem?
+select a.codart, a.nomeart
+from artista a
+where a.codart not in (select p.artcod
+from personagem p);
 
 --6. Crie uma consulta que apresente os nomes dos artistas que possuem cachê acima da média. Nesta, além de usar subconsulta, use JOIN entre artista e personagem.
+select a.nomeart
+from artista a join personagem p
+on a.codart = p.artcod
+where p.cachemoney = (select max(p.cachemoney) from personagem p);
 
 --7. Para a tabela artista, crie uma view artistaV com os seguintes campos: codart, nomeart, datanasc. Renomeie “codart” para “código do artista” e “nomeart” para “nome” na view. Liste o conteúdo da view criada.
+create view artistaV 
+as select codart as "codigo do artista", nomeart as "nome", datanasc
+from artista;
+select * from artistav;
 
 --8. Crie uma view filmeV com os seguintes campos: titulo,duração, ano, estúdio (nome do estúdio). Liste, em seguida, seu conteúdo .
+create view filmeV 
+as select f.titulo, f.duracao, f.ano, e.nomeest
+from filme f join estudio e
+on f.estudcod = e.codest;
+select * from filmeV;
 
 --9. Faça a inserção da artista “Mariana Ximenes” com a data de nascimento ‘27/11/78’ através da view artistaV. Como foi possível inserir por meio da view? Explique.
+insert into artistaV values('Mariana Ximenes', '1978-11-27'); --sem a atribuição de um valor para o código não é possível
+insert into artistaV values(default, 'Mariana Ximenes', '1978-11-27'); --com um valor para codart é 
+select * from artistaV;
+--Como a view utiliza os valores de base somente da tabela artista, a inserção pode ser feita, se e somente se, todos os campos estierem preeenchidos corretamente.
 
 --10. Tente inserir um filme através da view filmeV. O que aconteceu? Explique.
+--Não vai ser possível fazer a inserção, pois a view utiliza duas tabelas de base.
+insert into filmeV values('É assim que acaba', 140, 2024, 'Disney');
+--ERROR:  Visões que não selecionam de uma única tabela ou visão não são automaticamente atualizáveis.não é possível inserir na visão "filmev" 
 
 --11. Faça a inserção através da tabela base filme. Depois consulte a view. O filme foi inserido? Consulte também a tabela base e explique.
+insert into Filme values(default,'É assim que acaba',2024,140,4,1);
+select * from filme;
+select * from filmeV;
+--A inserção ocorreu, pois foi feita na tabela de base. Esta que se relaciona diretamente com a segunda tabela de base, o que permite a inserção de novos valores. Alterando também a view que é dependente das tabelas de base.
