@@ -4,8 +4,8 @@
 
 ## Requisitions
 + `VS Code`
-+ `Python 3`
-+ `Numpy`
++ `Python3/Numpy`
++ `R`
 + `NodeJS/Npm`
 + `Java Pack`
 
@@ -21,13 +21,14 @@ https://ananda-guedes.notion.site/Codes-9c1e863185a14107a82ac5ba5fe27912?pvs=4
 ## Description of Files
 | Name | Description |
 | ------ | ----------- |
-| Html | There are html and css practices, ex: forms, positions, style.|
-| Java | There are java practices, ex: first class.|
+| Html/Css | There are html and css practices, ex: forms, positions, style.|
 | JavaScript | There are javascript practices, ex: array, functions.|
-| Python | There are python practices, ex: decision, repetition, function.|
+| Node | There are nodejs practices, ex: uses of modules.|
+| React | There are react practices, ex: first project using nextjs.|
+| Java | There are java practices, ex: first class.|
+| Python | There are python practices, ex: decision, repetition, function, semaphore.|
 | Sql | There are sql practices, ex: create, insert, use.|
 | R | There are r practices, ex: mean, log.|
-| OperationalSystem | There are os practices, ex: thread, sockets, semaphore.|
 
 
 ### Developer
