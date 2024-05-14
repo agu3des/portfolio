@@ -9,7 +9,7 @@ const Sequelize = require("sequelize");
         app.engine('handlebars', handlebars({defaultLayout: 'main'}))
         app.set('view engine', 'handlebars')//usar o template handlebars pro engine
     // Conexão com o banco de dados mysql
-        const sequelize = new Sequelize("teste", "root", "Anand@2004", {
+        const sequelize = new Sequelize("teste", "root", "senha", {
             host: "localhost",
             dialect: "mysql"
         });
