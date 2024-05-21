@@ -1,22 +1,19 @@
+package Unique;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Color;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 
-public class Exemplo1 {
+public class Janela1 {
 
 	private JFrame frame;
-	private JButton button;
-	private JLabel label;
 	private JTextField textField;
+	private JTextField textField_1;
+	private JButton button;
 	private JButton button_1;
 
 	/**
@@ -26,7 +23,7 @@ public class Exemplo1 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Exemplo1 window = new Exemplo1();
+					Janela1 window = new Janela1();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +35,7 @@ public class Exemplo1 {
 	/**
 	 * Create the application.
 	 */
-	public Exemplo1() {
+	public Janela1() {
 		initialize();
 	}
 
@@ -47,40 +44,45 @@ public class Exemplo1 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("Primeira Janela");
+		frame.setTitle("Janela de Troca");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		label = new JLabel();
-		label.setText("Digite uma palavra");
-		label.setBounds(56, 131, 55, 14);
-		frame.getContentPane().add(label);
-		
 		textField = new JTextField();
 		textField.setText("");
-		textField.setBounds(147, 128, 86, 20);
+		textField.setBounds(10, 77, 86, 36);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		button = new JButton();
-		button.setText("Ok");
-		button.setBounds(296, 99, 101, 20);
-		button.addActionListener(
-			new ActionListener() {
+		textField_1 = new JTextField();		
+		textField_1.setText("");
+		textField_1.setColumns(10);
+		textField_1.setBounds(338, 77, 86, 36);
+		frame.getContentPane().add(textField_1);
+		
+		button = new JButton("-->");
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String menssage = "Você escreveu: "+ textField.getText();
-				JOptionPane.showMessageDialog(null, menssage); }});
-		frame.getContentPane().setLayout(null);
+                String textoCampo1 = textField.getText();
+                textField_1.setText(textoCampo1);
+				textField.setText("");
+				textField.requestFocus();
+			}
+		});
+		button.setBounds(106, 84, 89, 23);
 		frame.getContentPane().add(button);
 		
-		button_1 = new JButton("Limpar");
-		button_1.setBounds(296, 162, 101, 23);
-		frame.getContentPane().add(button_1);
+		button_1 = new JButton("<--");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			textField.setText("");
-			textField.requestFocus();}});
-
+                String textoCampo2 = textField_1.getText();
+                textField.setText(textoCampo2);
+				textField_1.setText("");
+				textField_1.requestFocus();
+			}
+		});
+		button_1.setBounds(226, 84, 89, 23);
+		frame.getContentPane().add(button_1);
 	}
 }
