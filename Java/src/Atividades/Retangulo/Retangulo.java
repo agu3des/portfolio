@@ -1,6 +1,5 @@
-import String;
+package Java.src.Atividades.Retangulo;
 
-package Retangulo;
 public class Retangulo {
 	public int id; // identificar qual o objeto
 	public double largura; // atributo

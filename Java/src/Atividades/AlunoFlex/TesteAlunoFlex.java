@@ -1,3 +1,5 @@
+package Java.src.Atividades.AlunoFlex;
+
 public class TesteAlunoFlex {
     public static void main(String[] args) {
         AlunoFlex a1 = new AlunoFlex("joao", 100, 70);

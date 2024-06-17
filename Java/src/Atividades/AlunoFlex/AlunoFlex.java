@@ -1,3 +1,5 @@
+package Java.src.Atividades.AlunoFlex;
+
 public class AlunoFlex {
 	private String nome;
 	private double[] notas; //[] para saber que é uma lista
