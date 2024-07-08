@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Script</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+    <body class="dark:bg-gray-800 dark:text-white">
+        <div class="pl-4 pt-2 pb-2">
+            <h1 class="text-black text-2xl transition duration-75 dark:text-pink-200 group-hover:text-gray-900 dark:group-hover:text-white" id="#home">
+            Script</h1>
+            <div class="container flex flex-wrap justify-center pt-2 mt-6">
+                <article class="flex max-w-xl flex-col items-start">
+                    <div class="flex items-center gap-x-4 text-xs">
+                        <time datetime="2020-03-16" class="text-gray-500 dark:text-white">Mar 16, 2020</time>
+                    </div>
+                    <div class="group relative">
+                        <h3 class="mt-3 text-lg leading-6 text-gray-900 group-hover:text-gray-600 dark:text-white">
+                        <a class="a dark:hover:text-pink-300"
+                            href="https://www.folhape.com.br/cultura/mulheres-buscam-maior-representatividade-na literatura/216267/"
+                            target="_blank">
+                            <span class="absolute inset-0"></span>Calendário de eventos literários em 2023 (no Brasil e no exterior)
+                        </a>
+                        </h3>
+                        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-white">Segundo a pesquisa Retratos da
+                        Leitura no Brasil, que mensura o comportamento dos leitores em âmbito nacional, as mulheres leem mais do que
+                        os homens. A última edição do estudo, revelou que 59% das mulheres do país são leitoras, enquanto no gênero
+                        masculino a taxa de leitores é de 52%. Entretanto, a maior adesão das mulheres aos livros ainda não se
+                        reflete na representatividade do mercado editorial, que apesar da evolução nos últimos anos, está longe da
+                        equidade de gênero.
+                    </div>
+                </article>
+            </div>
+
+            <!-- <script>window.confirm('Tá gostando de JS?')</script>  -->
+            <!-- ok ou cancela -->
+        <script>
+            let nome = window.prompt('Qual o seu nome?')
+            document.write(`Olá, <strong>${nome}<strong>! Seu nome tem ${nome.length} letras.`)
+            document.write(`Seu nome em maiúculas ${nome.toUpperCase()}, seu nome em minúsculas ${nome.toLocaleLowerCase()}`)
+            window.alert('É um grande prazer te conhecer, '+nome)
+            let n1 = Number(window.prompt('Digite um número:'))
+            let n2 = Number(window.prompt('Digite um número:'))
+            let soma = n1 + n2
+            window.alert('A soma dos valores é '+ soma) // desse modo ele vai concatenar 
+            
+
+        </script>
+    </body>
+</html>

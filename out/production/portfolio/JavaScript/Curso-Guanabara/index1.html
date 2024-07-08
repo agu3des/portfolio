@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiros passos com DOM</title>
+    <style>
+        body{
+            background: black;
+            color: white;
+            font: normal 18pt Arial;
+        } 
+    </style>
+</head>
+<body>
+    <h1>Iniciando estudos com DOM</h1>
+    <p>Aqui vai o resultado</p>
+    <p>Aprendendo a usar o <strong>DOM</strong> em JavaScript</p>
+    <div id="msg">Clique em mim</div>
+    <script>
+        window.document.write(window.document.URL) //acesso a vários componentes
+        var p1 = window.document.getElementsByTagName("p")[0]//primeiro parágrafo
+        var p2 = window.document.getElementsByTagName("p")[1]
+        var corpo = window.document.body
+        var d = window.document.getElementById("msg")
+        window.document.write("Está escrito assim: "+p1.innerText)//sem formatação
+        p1.style.color = "purple"
+        corpo.style.background = "pink"
+        document.write(p2.innerHTML)//vir com a formatação completa <strong>
+        document.alert(p2.innerHTML)
+        window.document.getElementById('msg').innerText = "olá"
+        var div = window.document.getElementsByName("msg")[0]
+        div.innerText = "Olá"
+        var a = window.document.querySelector("div#msg") //para classe troca o # por .
+        a.style.background = purple
+    </script>
+</body>
+</html>

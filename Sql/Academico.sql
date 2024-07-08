@@ -159,4 +159,3 @@ CHECK (salario >= 4000.00 and salario <=  20000.00);
 
 /* Após alterar a tabela Professor, insira ou atualize registros
 e verifique a condição de validação. */
-

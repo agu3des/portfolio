@@ -248,3 +248,142 @@ insert into Filme values(default,'É assim que acaba',2024,140,4,1);
 select * from filme;
 select * from filmeV;
 --A inserção ocorreu, pois foi feita na tabela de base. Esta que se relaciona diretamente com a segunda tabela de base, o que permite a inserção de novos valores. Alterando também a view que é dependente das tabelas de base.
+
+
+-- Aula 9 - Índices
+
+select * from artista order by codart; 
+select * from artista order by nomeart; 
+create index testenome on artista(nomeart);
+
+-- testando índices e constraints
+
+-- drop table c; 
+-- drop table d; 
+              --campos
+Create table c (c1 INT, c2 INT);
+select * from c; 
+Create unique INDEX ci ON c (c1, c2);  -- usa um índice para relacionar dois campos
+Alter table c ADD CONSTRAINT cpk PRIMARY KEY USING INDEX ci; --forçar o índice a ser usado
+select * from c; 
+
+-- segundo teste
+--chave primária composta
+CREATE TABLE d (d1 INT, d2 INT);
+select * from d; 
+ALTER TABLE d ADD CONSTRAINT dpk PRIMARY KEY (d1,d2);
+
+-- Visão que mostra informações sobre índices no postgres
+
+select * from pg_indexes; --consultar todos os índices
+
+select * from pg_indexes 
+where tablename in ('artista','filme');
+
+SELECT * FROM pg_indexes WHERE tablename = 'personagem';
+SELECT * FROM pg_indexes WHERE tablename = 'estudio';
+SELECT * FROM pg_indexes WHERE tablename = 'categoria';
+
+-- índice composto
+
+CREATE TABLE testeIn (id integer, maior integer, menor integer, nome  varchar(10));
+
+Insert into testeIn values (1,200,30,'X');
+Insert into testeIn values(2, 300,23,'Y');
+Insert into testeIn values(3, 200,30,'Z'); 
+
+select * from testeIn; 
+
+SELECT nome 
+FROM testeIn
+WHERE maior = 200 AND menor = 30;
+
+CREATE INDEX idx_testeIn_maior_menor 
+ON testeIn (maior, menor); --usa dois campos
+
+SELECT * FROM pg_indexes WHERE tablename = 'testein';
+
+-- usando a tabela Filme
+
+SELECT * FROM pg_indexes WHERE tablename = 'filme';
+
+select * from filme; 
+explain select * from filme; 
+
+explain analyze select * from filme where codcateg = 2;
+ 
+explain select codfil
+from filme 
+where codfil = 5; 
+
+explain analyze select codfil
+from filme 
+where codfil = 5; 
+
+explain analyze select titulo
+from filme 
+where codfil = 5; 
+
+-- consultando filmes
+
+select *
+from filme
+where ano = 2022; 
+
+explain analyze Select * 
+From filme
+Where ano = 2022; 
+
+-- drop index anoin; 
+
+CREATE INDEX anoIn ON filme(ano);
+
+explain analyze Select * 
+From filme
+Where ano = 2022;
+
+select * from artista; 
+
+explain analyze 
+select nomeart from artista where cidade = 'Los Angeles' and pais = 'USA';
+
+-- drop index artistaIn; 
+
+CREATE INDEX artistaIn ON artista(cidade,pais);
+
+explain analyze 
+select a.nomeart
+from artista a join personagem p on a.codart = p.codart
+     join filme f on p.codfilme = f.codfilme
+where f.ano = 2022; 
+
+select indexname
+from pg_indexes
+where tablename = 'artista'; 
+
+-- Teste de índice
+-- drop table testafilme; 
+
+--Criando nova tabela
+create table testaFilme as select * from filme;
+select * from testafilme;
+
+-- Populando a nova tabela
+DO $$DECLARE i int:= 0;
+BEGIN
+    WHILE I <= 2000 LOOP
+        INSERT INTO testafilme select * from filme;
+        I := I + 1;
+    END LOOP;
+END$$;
+
+Explain select titulo from testafilme order by titulo;
+select titulo from testafilme order by titulo; 
+
+--- criando índice
+create index testaFilmeindex on testafilme(titulo);
+---
+
+explain select titulo from testafilme order by titulo; 
+select titulo from testafilme order by titulo; 
+select distinct titulo from testafilme order by titulo; 
