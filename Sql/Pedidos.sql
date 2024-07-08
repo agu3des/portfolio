@@ -460,7 +460,7 @@ select incrementa(2);
 
 select * from cliente order by codcli; 
 
-DO $$ 
+DO $$ --altera apenas 1 registro
 Declare nomeVar varchar(40);
 Begin
    select nome into strict nomeVar
@@ -519,9 +519,9 @@ Begin
   end if;
 End$$;
 
- select codprod, descricao, status, quantest 
- from produto
- order by codprod;
+select codprod, descricao, status, quantest 
+from produto
+order by codprod;
 
 -- Exemplo 4
 
@@ -531,8 +531,80 @@ DO $$
   DECLARE
     v_vendedor  vendedor%ROWTYPE;
 Begin
-    SELECT codvend, nome INTO v_vendedor
+    SELECT codvend, nome INTO v_vendedor --jogue os 2 valores para v_vendedor, se colocasse outra coisa não iria pq os outros campos estão nulos
     FROM vendedor
     WHERE codvend = 2;
     raise notice 'Vendedor selecionado = %',v_vendedor.nome;
 End$$;
+
+
+
+
+
+--Tarefa 6
+--1. Verifique o seguinte código: 
+DO $$ 
+Declare 
+ nomeCli varchar(40); 
+ qtdelinhas integer; 
+BEGIN 
+ select nome into nomeCli from cliente where codcli = 2; 
+ GET DIAGNOSTICS qtdelinhas := ROW_COUNT; 
+ raise notice 'Nome cliente = %', nomeCli; 
+ raise notice 'Quantidade de registros retornados = %',qtdelinhas; 
+END$$; 
+--a) Explique o que ele faz. Quantos registros são retornados?? 
+--seleciona da tabela cliente o nome do clinte que tem código = 2, e utiliza o diagnostics para contar a quantidade
+--de linhas retornadas.
+
+--2. Verifique o seguinte código, explique o que ele faz e mostra. Depois, explique para que serve o ROWTYPE.  
+DO $$ 
+DECLARE 
+ clireg cliente%ROWTYPE; 
+ info varchar(50); 
+BEGIN 
+ clireg.codcli := 13; 
+ clireg.nome := 'Ariane Botelho'; 
+ clireg.cidade := 'Campina Grande'; 
+ Select clireg.nome || ' trabalha em '||clireg.cidade into info; 
+ raise notice 'Informação = %', info; 
+END$$; 
+--cria uma varivel com a mesma estrutura de cliente (rowtype) e atribui os valores
+--de código, nome e cidade a ela. Depois ele exibe a variável como uma mensagem.
+
+--3. Considerando isso, teste o seguinte comando:  
+Explain Select * from cliente
+where uf = 'PB'; 
+--a) Qual o custo dessa consulta? 0.00..12.75 
+--b) Quantos registros serão obtidos? 1 
+--c) Execute efetivamente a consulta e informe seu tempo de resposta. 00:00:01.025  
+--4. Quando o planejador de consultas monta o plano de execução da consulta, ele pode fazer  uso de índices, caso existam. Efetue os testes seguintes.  
+create table testaCLI as select * from cliente; 
+select * from testaCLI; 
+-- execute o bloco anônimo seguinte completo (do DO até o $$;) e não linha a linha 
+DO $$ 
+DECLARE i int:= 0; 
+BEGIN 
+ WHILE I <= 10000 LOOP 
+ INSERT INTO testaCLI select * from cliente; 
+ I := I + 1; 
+ END LOOP; 
+END$$;
+
+Select nome from testaCLI where uf = 'PB'; 
+EXPLAIN Select  nome from testaCLI where uf = 'PB'; 
+--- 
+create index testaClindex on testaCLI(uf); 
+--- 
+Select nome from testaCLI where uf = 'PB'; 
+
+--a) Compare os resultados e explique o que aconteceu. Houve melhora no tempo de  resposta da consulta com o índice?  
+--sem o índice: 00:00:00.349 
+--com o índice:  00:00:00.187
+--Houve melhora no desempenho, com diminuição de 46.3% no tempo de execução.
+--** Verifique os seguintes comandos e informe a quantidade de páginas de disco ocupadas  pelas tabelas CLIENTE e TESTACLI: 
+select relpages from pg_class where relname = 'cliente'; -- 0
+select relpages from pg_class where relname = 'testacli'; --1251
+
+--5. Quais índices existem para a tabela CLIENTE? Considerando um alto volume de dados, qual outro índice poderia ser criado  para essa tabela? Qual a justificativa para sua criação? 
+--Não possui nenhum índice. O telefone, pois tendo um cadastro o telefone seria único, de forma a cumprir o conceito de que se a tabela tiver muitas linhas e suas consultas retornam poucas.
