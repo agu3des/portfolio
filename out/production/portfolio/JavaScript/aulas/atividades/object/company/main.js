@@ -1,1 +1,0 @@
-companies.list().forEach((company) => (company))

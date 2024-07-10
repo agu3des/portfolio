@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry excluding="Java/src/CursoLoiane/|Java/src/Aulas/|Java/src/Atividades/JogoAdvinhacao/|Java/src/dataStructure/Main/|Java/src/Atividades/Conta/|Java/src/Atividades/Aluno/|Java/src/|Java/src/Atividades/" kind="src" path=""/>
-	<classpathentry kind="output" path="out/production/portfolio"/>
-</classpath>

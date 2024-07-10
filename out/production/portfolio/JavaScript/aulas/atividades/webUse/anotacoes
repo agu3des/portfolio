@@ -1,6 +1,0 @@
-- todas as script se juntam em uma só área na memória
-- carrega e executa de baixo pra cima, logo, a parte do lib não pode estar embaixo
-- script deve ficar embaixo, pois ele para alterá-las precisa da existência delas
-- utilizar recursos de navegador fazendo-os se tornar objetos
-- window console: tela / location: endereço para especializar location.algo / navigator: sua localização geográfica
-- são objetos de recurso do navegador
