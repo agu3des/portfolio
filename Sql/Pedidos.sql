@@ -608,3 +608,56 @@ select relpages from pg_class where relname = 'testacli'; --1251
 
 --5. Quais índices existem para a tabela CLIENTE? Considerando um alto volume de dados, qual outro índice poderia ser criado  para essa tabela? Qual a justificativa para sua criação? 
 --Não possui nenhum índice. O telefone, pois tendo um cadastro o telefone seria único, de forma a cumprir o conceito de que se a tabela tiver muitas linhas e suas consultas retornam poucas.
+
+
+
+Do $$ Declare
+	qtd_atual produto.quantest%type;
+	v_cod produto.codprod%type;
+	p_cursor_prod cursor for
+		select codprod,quantest from produto;
+Begin
+	open p_cursor_prod;
+	loop
+		fetch p_cursor_prod into v_cod,qtd_atual;
+		if qtd_atual > 30 then
+			update produto
+			set status = 'Estoque dentro do esperado'
+			where codprod = v_cod;
+		else update produto
+			set status = 'Estoque fora do limite mínimo'
+			where codprod = v_cod;
+		end if;
+	    exit when not found;
+	end loop;
+	close p_cursor_prod;
+End$$;
+
+
+select * from produto order by codprod;
+
+
+Do $$ 
+Declare
+	qtd_atual produto.quantest%type;
+	v_cod produto.codprod%type;
+	p_cursor_prod cursor for
+		select codprod,quantest from produto;
+Begin
+	for vlocal in p_cursor_prod loop
+		 v_cod := vlocal.codprod;
+		 qtd_atual := vlocal.quantest;
+		if qtd_atual > 30 then
+			update produto
+			set status = 'Estoque dentro do esperado'
+			where codprod = v_cod;
+		else update produto
+			set status = 'Estoque fora do limite mínimo'
+			where codprod = v_cod;
+		end if;
+--	    exit when not found;
+	end loop;
+--	close p_cursor_prod;
+End$$;
+
+select * from produto order by codprod;

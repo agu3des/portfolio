@@ -387,3 +387,22 @@ create index testaFilmeindex on testafilme(titulo);
 explain select titulo from testafilme order by titulo; 
 select titulo from testafilme order by titulo; 
 select distinct titulo from testafilme order by titulo; 
+
+
+create table top as select a.codart, nomeart, cachemoney
+from artista a join personagem p on a.codart = p.artcod where 1 = 2;
+
+DO $$
+declare
+	regart public.top%ROWTYPE;
+Begin
+	For regart IN (Select distinct a.codart, nomeart, cachemoney
+			FROM artista a join personagem p
+			on a.codart = p.artcod
+			WHERE cachemoney > 7000) LOOP
+		Insert into top values
+			(regart.codart,regart.nomeart, regart.cachemoney);
+	End loop;
+End$$;
+
+select * from top order by codart;
