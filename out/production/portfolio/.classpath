@@ -2,13 +2,5 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry excluding="Java/src/CursoLoiane/|Java/src/Aulas/|Java/src/Atividades/JogoAdvinhacao/|Java/src/dataStructure/Main/|Java/src/Atividades/Conta/|Java/src/Atividades/Aluno/|Java/src/|Java/src/Atividades/" kind="src" path=""/>
-	<classpathentry excluding="CursoLoiane/|Aulas/|Atividades/JogoAdvinhacao/|dataStructure/Main/|Atividades/Conta/|Atividades/Aluno/|Atividades/" kind="src" path="Java/src"/>
-	<classpathentry excluding="JogoAdvinhacao/|Conta/|Aluno/" kind="src" path="Java/src/Atividades"/>
-	<classpathentry kind="src" path="Java/src/Atividades/Aluno"/>
-	<classpathentry kind="src" path="Java/src/Atividades/Conta"/>
-	<classpathentry kind="src" path="Java/src/Atividades/JogoAdvinhacao"/>
-	<classpathentry kind="src" path="Java/src/Aulas"/>
-	<classpathentry kind="src" path="Java/src/CursoLoiane"/>
-	<classpathentry kind="src" path="Java/src/dataStructure/Main"/>
 	<classpathentry kind="output" path="out/production/portfolio"/>
 </classpath>
