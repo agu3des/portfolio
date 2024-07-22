@@ -406,3 +406,124 @@ Begin
 End$$;
 
 select * from top order by codart;
+
+--8 - Blocos Anônimos PL/pgSQL
+
+--1.  Veja a estrutura da tabela ARTISTA e seu conteúdo. Caso não exista o campo “indicacaooscar” (tipo integer), adicione-o à tabela. Em seguida, verifique o seguinte código.
+--O que ele faz? Onde você viu o resultado?
+alter table artista add indicacaooscar integer;
+
+DO $$
+BEGIN
+  UPDATE artista
+	SET indicacaooscar = 10
+	WHERE codart = 30;
+  IF NOT FOUND THEN
+  	INSERT INTO artista (codart, nomeart, indicacaooscar)
+  	VALUES (30, 'mary Deep', 8);
+  END IF;
+END$$;
+
+select * from artista;
+--Ele atualiza na tabela artista um valor para indicação do oscar se 
+--o artista relacionado já existir, se não ele cria um artista com esses valores.
+--o campo alterado aparece ao se fazer um select na tabela.
+
+
+--2.   Faça um truncate table na tabela testa_bloco (Material 10-PL/pgSQL). Caso não tenha a tabela, crie-a. 
+--Em seguida, faça uma rotina (bloco anônimo) semelhante à de inserção instestabloco (do mesmo material), 
+--para inserir registros nesta tabela, sempre que o código gerado for múltiplo de 3 (** use a função mod(i,j) -> 
+--retorna o resto da divisão de i por j. Ex: mod(i,3)). Verifique os registros inseridos. Como você verificou o resultado da execução?
+
+truncate table testa_bloco;
+create table testa_bloco (coluna1 integer primary key, coluna2 date);
+select * from testa_bloco;
+do $$
+	declare 
+		i int := 0;
+	begin
+		while i <= 10 loop
+			if mod(i,3) = 0 then
+				insert into testa_bloco (coluna1, coluna2)
+					values (i, current_date);
+			end if;
+			i := i + 1;
+     end loop;
+end$$;
+
+select * from testa_bloco; 
+--Através de um select.
+
+--3. Insira mais registros na tabela Filme (pelo menos 4). Implemente uma rotina para mostrar todos os 
+--títulos de filmes que pertencem à categoria com descrição = ‘Aventura’. Use um CURSOR para isso. Use a cláusula FOR.
+insert into Filme values(default,'Interestelar',2020,135,2,2);
+insert into Filme values(default,'As Entregas da Kiki',2004,195,3,1);
+insert into Filme values(default,'Meu Amigo Totoro',2008,200,3,1);
+insert into Filme values(default,'Castelo Animado',2007,110,2,2);
+
+select * from Filme;
+
+do $$
+declare
+	vtitulo filme.titulo%type;
+		vcursor_filme cursor for
+				select distinct f.titulo 
+				from filme f 
+				join categoria ca 
+					on f.categcod = ca.codcat
+					where ca.desccat = 'Aventura';
+begin
+	for vfilme in vcursor_filme loop
+		vtitulo := vfilme.titulo;
+		raise notice 'Título do filme = %', vtitulo;
+		end loop;
+end$$;
+
+
+--4. Repita o bloco anônimo anterior, mas, desta vez, verificando filmes de outra categoria como, por exemplo, ‘Ação’.
+
+do $$
+declare
+	vtitulo filme.titulo%type;
+		vcursor_filme cursor for
+				select distinct f.titulo 
+				from filme f 
+				join categoria ca 
+					on f.categcod = ca.codcat
+					where ca.desccat = 'Ação';
+begin
+	for vfilme in vcursor_filme loop
+		vtitulo := vfilme.titulo;
+		raise notice 'Título do filme = %', vtitulo;
+		end loop;
+end$$;
+
+
+--5.Verifique o seguinte bloco:
+Do $$
+Declare
+ 	V_cursorTB cursor for 
+                select coluna1,coluna2 from testa_bloco;
+Begin
+  for x in v_cursorTB loop
+     raise notice 'Coluna 2 = %', TO_CHAR(x.coluna2,'MM/DD/YYYY,HH:MI:SS');
+  end loop;
+End$$;
+
+select * from testa_bloco;
+--O que ele faz?
+--Mostra um mensagem, na qual é selecionado cada elemento da coluna dois, pois ele faz uma iteração, com a formatação da data diferente.
+--Explique porque um cursor foi utilizado.
+--O funcionamento é o mesmo, no entanto definindo o cursor o código se torna mais legível.
+--Para fazer a iteração de cada elemento, de modo a mostrar cada um separadamente e não em bloco.
+--Agora, reescreva-o definindo o cursor diretamente no FOR (cursor implícito). 
+Do $$
+Declare
+ 	x public.testa_bloco%rowtype;
+Begin
+  for x in (select coluna1,coluna2 from testa_bloco) loop
+     raise notice 'Coluna 2 = %', TO_CHAR(x.coluna2,'MM/DD/YYYY,HH:MI:SS');
+  end loop;
+End$$;
+
+select * from testa_bloco;
