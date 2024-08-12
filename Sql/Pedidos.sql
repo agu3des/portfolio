@@ -157,7 +157,7 @@ Where nome like '________a'
 -- BD Pedidos
 -- script da aula 05 - subqueries e outros comandos
 
-select * from produto order by codprod; 
+select * from Produto order by codprod; 
 
 Select descricao
 From produto
@@ -356,7 +356,7 @@ values(110,'Arroz','KG');
 Select * from Prquilo; 
 
 Update Prquilo
-Set descricao = ‘Arroz Integral’
+Set descricao = 'Arroz Integral'
 Where codigo = 110;
 Select * from prquilo order by codigo;
 Select * from produto order by codprod;
@@ -608,9 +608,6 @@ select relpages from pg_class where relname = 'testacli'; --1251
 
 --5. Quais índices existem para a tabela CLIENTE? Considerando um alto volume de dados, qual outro índice poderia ser criado  para essa tabela? Qual a justificativa para sua criação? 
 --Não possui nenhum índice. O telefone, pois tendo um cadastro o telefone seria único, de forma a cumprir o conceito de que se a tabela tiver muitas linhas e suas consultas retornam poucas.
-
-
-
 Do $$ Declare
 	qtd_atual produto.quantest%type;
 	v_cod produto.codprod%type;
@@ -661,3 +658,98 @@ Begin
 End$$;
 
 select * from produto order by codprod;
+
+-- Aula 13
+
+-- Exemplo 1
+
+CREATE OR REPLACE FUNCTION retornaInfoProd(v_cod in produto.codprod%type) 
+RETURNS varchar AS $$
+Declare
+       V_nome produto.descricao%type;
+       V_preco produto.valor%type;
+       Msg varchar(30);
+Begin
+     Select descricao, valor into strict v_nome, v_preco From produto 
+     Where codprod = v_cod;
+     select v_nome || '--'|| v_preco into msg;
+     return msg;
+     Exception
+          When No_data_found then
+                msg = 'Nenhum produto encontrado';
+                Return msg;
+         When others then
+		   Return 'Erro desconhecido ';
+End;
+$$ LANGUAGE plpgsql; 
+
+Select * from produto order by codprod; 
+Select retornaInfoProd(2);
+Select retornaInfoprod(30);
+
+
+-- Tarefa 9 - Funções armazenadas
+--1. Transforme o bloco anônimo “atualiza_status_estoque.sql” (material 10-PL/SQL
+--INTRO), mostrado a seguir, em uma função armazenada que receba o código do produto
+--como parâmetro e faça a atualização do status do produto passado.
+drop function  atualiza_status_estoque;
+
+create or replace function atualiza_status_estoque (codigo in produto.codprod%type)
+returns void as $$
+	Declare qtd_atual produto.quantest%type;
+Begin
+	select quantest into qtd_atual from produto
+		where codprod = codigo;
+		if qtd_atual > 30 then
+			update produto
+			set status = 'Estoque dentro do esperado'
+			where codprod = codigo;
+		else
+			update produto
+			set status = 'Estoque fora do limite minimo'
+			where codprod = codigo;
+		end if;
+	End;
+$$ language 'plpgsql';
+--Crie a função pedida e execute-a seguindo os comandos:
+select * from produto;
+update produto set status = null where codprod = 6;
+--update produto set quantest = 87
+--where codprod = 6
+select atualiza_status_estoque(6);
+--** Altere o código do produto conforme seus dados.
+
+
+--2. Analise e execute a função seguinte. Explique o que ela faz.
+create or replace function getSumSalario()
+returns numeric as $$
+Declare
+	salcomp numeric;
+	v record;
+Begin
+	Salcomp = 0;
+for v in (select salariofixo from vendedor where salariofixo is not null) 
+	loop salcomp = salcomp + v.salariofixo; 
+	end loop;
+return salcomp;
+end;
+$$ LANGUAGE 'plpgsql';
+
+select getSumsalario();
+--cria uma função para retornar a soma do salário. Seleciona o salário fixo de um vendedor onde ele seja não nulo e faz 
+--uma repetição onde a variável criada vai ser incrementada por cada iteração do salário fixo
+
+--2.1 Crie outra versão desta function (getSumSalario2), usando, dessa vez, a função SUM
+--SQL pré-definida. Mostre sua execução.
+
+--3. Crie uma tabela Fornecedor (esquema de metadados mostrado a seguir). Em seguida,
+--faça uma função que permita a inserção de registros nesta tabela, passando os parâmetros
+--necessários (SEM o código que é tipo serial).
+
+--** Execute a função e insira 3 fornecedores. Consulte a tabela e veja como ficaram os registros.
+
+--4. Desenvolva uma função armazenada (showFornecedor) que mostre, via mensagem,
+--todos os fornecedores cadastrados. Apresente seus códigos, nomes e emails. Use um
+--cursor para isso. Mostre sua execução. O resultado deve ser mostrado assim:
+
+--* Dica: use a função de concatenação de string ||
