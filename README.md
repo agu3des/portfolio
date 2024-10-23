@@ -1,6 +1,6 @@
 <h1 align="center">Practice</h1>
 
-`"Practice"` - Python, Html/Css, JavaScript, Java and Sql
+`"Practice"` - Python, R, Html/Css, JavaScript, NodeJS and React
 
 ## Requisitions
 + `VS Code`
